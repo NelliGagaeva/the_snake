@@ -21,6 +21,7 @@ RIGHT = (BLOCK, 0)
 
 
 class GameObject:
+
     def __init__(self, pos, color):
         self.pos = pos
         self.color = color
@@ -30,13 +31,12 @@ class GameObject:
 
 
 class Apple(GameObject):
+
     def __init__(self):
         super().__init__((0, 0), APPLE_COLOR)
         self.place_random()
 
     def place_random(self, snake_body=None):
-        """Разместить яблоко в случайной клетке,
-        не совпадающей с змейкой."""
         while True:
             x = random.randint(0, CELL_W - 1) * BLOCK
             y = random.randint(0, CELL_H - 1) * BLOCK
@@ -52,6 +52,7 @@ class Apple(GameObject):
 
 
 class Snake(GameObject):
+
     def __init__(self):
         mid_x = (CELL_W // 2) * BLOCK
         mid_y = (CELL_H // 2) * BLOCK
@@ -144,5 +145,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-    
-        
