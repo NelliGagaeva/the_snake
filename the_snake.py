@@ -1,11 +1,11 @@
 import pygame
-import sys
 import random
+import sys
 
 # Константы размеров и параметров
 WIDTH, HEIGHT = 640, 480  # размер окна
 BLOCK = 20  # размер клетки
-CELL_W, CELL_H = WIDTH // BLOCK, HEIGHT // BLOCK 
+CELL_W, CELL_H = WIDTH // BLOCK, HEIGHT // BLOCK
 SPEED = 10  # FPS
 
 # Цвета
@@ -36,7 +36,7 @@ class Apple(GameObject):
 
     def place_random(self, snake_body=None):
         """Разместить яблоко в случайной клетке,
-        не совпадающей с змейкой"""
+        не совпадающей с змейкой."""
         while True:
             x = random.randint(0, CELL_W - 1) * BLOCK
             y = random.randint(0, CELL_H - 1) * BLOCK
@@ -62,12 +62,10 @@ class Snake(GameObject):
         self.next_direction = None
 
     def set_direction(self):
-        if self.next_direction:
-            # Не разрешаем двигаться в обратном направлении
-            rev_dir = (-self.direction[0], -self.direction[1])
-            if self.next_direction != rev_dir:
-                self.direction = self.next_direction
-            self.next_direction = None
+        rev = (-self.direction[0], -self.direction[1])
+        if self.next_direction and self.next_direction != rev:
+            self.direction = self.next_direction
+        self.next_direction = None
 
     def advance(self):
         head_x, head_y = self.body[0]
@@ -114,11 +112,12 @@ def handle_input(snake):
 def main():
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Змейка")
+    pygame.display.set_caption('Змейка')
     clock = pygame.time.Clock()
 
     snake = Snake()
     apple = Apple()
+    apple.place_random(snake.body)
 
     while True:
         handle_input(snake)
@@ -128,27 +127,22 @@ def main():
         # Проверка съедания яблока
         if snake.head_pos() == apple.pos:
             snake.length += 1
-            apple.place_random(snake.body)  
+            apple.place_random(snake.body)
 
         # Проверка столкновения с самим собой
         if snake.head_pos() in snake.body[1:]:
             snake.restart()
+            apple.place_random(snake.body)
 
-        # Отрисовка
         screen.fill(BLACK)
         apple.draw(screen)
         snake.draw(screen)
         pygame.display.flip()
-
         clock.tick(SPEED)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
-        
-           
-
-
 
     
         
