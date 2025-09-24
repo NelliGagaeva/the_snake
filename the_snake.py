@@ -2,6 +2,7 @@ import sys
 import pygame
 from random import randint
 
+
 # Размеры окна
 WIDTH, HEIGHT = 640, 480
 
@@ -28,8 +29,10 @@ APPLE_COLOR = (255, 0, 0)
 BORDER_COLOR = (93, 216, 228)
 BOARD_BACKGROUND_COLOR = (0, 0, 0)  # Можно оставить, если понадобится
 
+
 class GameObject:
     """Базовый класс для игровых объектов."""
+
     def __init__(self, pos, color):
         self.pos = pos
         self.color = color
@@ -41,6 +44,7 @@ class GameObject:
 
 class Apple(GameObject):
     """Класс яблока."""
+
     def __init__(self):
         super().__init__((0, 0), APPLE_COLOR)
         self.place_random()
@@ -61,6 +65,7 @@ class Apple(GameObject):
 
 class Snake(GameObject):
     """Класс змейки."""
+
     def __init__(self):
         mid_x = (CELL_W // 2) * BLOCK
         mid_y = (CELL_H // 2) * BLOCK
