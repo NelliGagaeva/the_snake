@@ -3,17 +3,11 @@ import pygame
 from random import randint
 
 
-# Размеры окна
+# Константы (вынесены в начало файла)
 WIDTH, HEIGHT = 640, 480
-
-# Размер клетки
 BLOCK = 20
-
-# Количество клеток по горизонтали и вертикали
 CELL_W = WIDTH // BLOCK
 CELL_H = HEIGHT // BLOCK
-
-# Скорость игры (FPS)
 SPEED = 10
 
 # Направления движения
@@ -27,7 +21,6 @@ BLACK = (0, 0, 0)
 SNAKE_COLOR = (0, 255, 0)
 APPLE_COLOR = (255, 0, 0)
 BORDER_COLOR = (93, 216, 228)
-BOARD_BACKGROUND_COLOR = (0, 0, 0)  # Можно оставить, если понадобится
 
 
 class GameObject:
