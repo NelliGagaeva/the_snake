@@ -1,7 +1,7 @@
 import sys
-import pygame
 from random import randint
 
+import pygame
 
 # Константы (вынесены в начало файла)
 WIDTH, HEIGHT = 640, 480
