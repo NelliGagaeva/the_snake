@@ -46,9 +46,9 @@ class GameObject:
 
     def draw(self):
         """Отрисовка объекта. Реализуется в наследниках."""
-        pass 
-        
-        
+        pass
+
+
 class Apple(GameObject):
     """Класс яблока."""
 
@@ -99,7 +99,7 @@ class Snake(GameObject):
             self.next_direction = None
 
     def move(self):
-        """Перемещает змею по текущему направлению"""
+        """Перемещает змею по текущему направлению."""
         head_x, head_y = self.positions[0]
         dx, dy = self.direction
         new_x = (head_x + dx * GRID_SIZE) % SCREEN_WIDTH
@@ -168,14 +168,17 @@ def main():
         snake.update_direction()
         snake.move()
 
+        # Проверка съедания яблока
         if snake.get_head_position() == apple.position:
             snake.length += 1
             apple.position = apple.randomize_position(snake.positions)
 
+        # Проверка на столкновение с телом
         if snake.get_head_position() in snake.positions[1:]:
             snake.reset()
             apple.position = apple.randomize_position(snake.positions)
 
+        # Отрисовка
         screen.fill(BOARD_BACKGROUND_COLOR)
         apple.draw()
         snake.draw()
@@ -185,4 +188,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main() 
+    main()
