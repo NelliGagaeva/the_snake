@@ -46,8 +46,8 @@ class Apple(GameObject):
 
     def randomize_position(self):
         """Устанавливает случайную позицию по сетке."""
-        max_x = SCREEN_WIDTH // GRID_SIZE - 1
-        max_y = SCREEN_HEIGHT // GRID_SIZE - 1
+        max_x = (SCREEN_WIDTH // GRID_SIZE) - 1
+        max_y = (SCREEN_HEIGHT // GRID_SIZE) - 1
         self.position = (
             random.randint(0, max_x) * GRID_SIZE,
             random.randint(0, max_y) * GRID_SIZE
@@ -55,7 +55,9 @@ class Apple(GameObject):
 
     def draw(self, surface):
         """Рисует яблоко как квадрат."""
-        rect = pygame.Rect(self.position[0], self.position[1], GRID_SIZE, GRID_SIZE)
+        rect = pygame.Rect(
+            self.position[0], self.position[1], GRID_SIZE, GRID_SIZE
+        )
         pygame.draw.rect(surface, self.body_color, rect)
 
 
@@ -64,8 +66,12 @@ class Snake(GameObject):
 
     def __init__(self):
         """Инициализация змейки в центре экрана."""
-        start_x = (SCREEN_WIDTH // (2 * GRID_SIZE)) * GRID_SIZE
-        start_y = (SCREEN_HEIGHT // (2 * GRID_SIZE)) * GRID_SIZE
+        start_x = (
+            (SCREEN_WIDTH // (2 * GRID_SIZE)) * GRID_SIZE
+        )
+        start_y = (
+            (SCREEN_HEIGHT // (2 * GRID_SIZE)) * GRID_SIZE
+        )
         super().__init__((start_x, start_y), SNAKE_COLOR)
         self.length = 1
         self.positions = [(start_x, start_y)]
@@ -90,8 +96,10 @@ class Snake(GameObject):
         """Сдвигает змейку на один шаг по направлению."""
         head = self.get_head_position()
         dx, dy = self.direction
-        new_head = ((head[0] + dx) % SCREEN_WIDTH,
-                    (head[1] + dy) % SCREEN_HEIGHT)
+        new_head = (
+            (head[0] + dx) % SCREEN_WIDTH,
+            (head[1] + dy) % SCREEN_HEIGHT
+        )
         self.last = self.positions[-1]
         self.positions.insert(0, new_head)
         if len(self.positions) > self.length:
@@ -112,8 +120,12 @@ class Snake(GameObject):
 
     def reset(self):
         """Сбрасывает змейку в исходное состояние."""
-        start_x = (SCREEN_WIDTH // (2 * GRID_SIZE)) * GRID_SIZE
-        start_y = (SCREEN_HEIGHT // (2 * GRID_SIZE)) * GRID_SIZE
+        start_x = (
+            (SCREEN_WIDTH // (2 * GRID_SIZE)) * GRID_SIZE
+        )
+        start_y = (
+            (SCREEN_HEIGHT // (2 * GRID_SIZE)) * GRID_SIZE
+        )
         self.positions = [(start_x, start_y)]
         self.length = 1
         self.direction = random.choice([
@@ -158,6 +170,7 @@ def main():
             snake.length += 1
             apple.randomize_position()
 
+        # Проверка на столкновение со своим хвостом
         if len(snake.positions) != len(set(snake.positions)):
             snake.reset()
 
