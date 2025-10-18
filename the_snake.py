@@ -1,5 +1,4 @@
 import pygame
-
 import random
 
 # Инициализация PyGame
@@ -33,7 +32,7 @@ class GameObject:
         self.body_color = body_color
 
     def draw(self, surface):
-        """Метод-«заглушка» отрисовки для наследников."""
+        """Общий метод-отрисовка — переопределяется в наследниках."""
         pass
 
 
@@ -56,8 +55,7 @@ class Apple(GameObject):
 
     def draw(self, surface):
         """Рисует яблоко как квадрат."""
-        rect = pygame.Rect(self.position[0], self.position[1],
-                           GRID_SIZE, GRID_SIZE)
+        rect = pygame.Rect(self.position[0], self.position[1], GRID_SIZE, GRID_SIZE)
         pygame.draw.rect(surface, self.body_color, rect)
 
 
@@ -94,7 +92,6 @@ class Snake(GameObject):
         dx, dy = self.direction
         new_head = ((head[0] + dx) % SCREEN_WIDTH,
                     (head[1] + dy) % SCREEN_HEIGHT)
-
         self.last = self.positions[-1]
         self.positions.insert(0, new_head)
         if len(self.positions) > self.length:
@@ -106,8 +103,7 @@ class Snake(GameObject):
             rect = pygame.Rect(seg[0], seg[1], GRID_SIZE, GRID_SIZE)
             pygame.draw.rect(surface, self.body_color, rect)
         if self.last:
-            rect = pygame.Rect(self.last[0], self.last[1],
-                               GRID_SIZE, GRID_SIZE)
+            rect = pygame.Rect(self.last[0], self.last[1], GRID_SIZE, GRID_SIZE)
             pygame.draw.rect(surface, BOARD_BACKGROUND_COLOR, rect)
 
     def get_head_position(self):
