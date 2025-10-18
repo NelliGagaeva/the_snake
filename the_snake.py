@@ -1,3 +1,4 @@
+
 import pygame
 import random
 
@@ -66,18 +67,18 @@ class Snake(GameObject):
 
     def __init__(self):
         """Инициализация змейки в центре экрана."""
-        start_x = (
-            (SCREEN_WIDTH // (2 * GRID_SIZE)) * GRID_SIZE
-        )
-        start_y = (
-            (SCREEN_HEIGHT // (2 * GRID_SIZE)) * GRID_SIZE
-        )
+        half_width = SCREEN_WIDTH // 2
+        start_x = (half_width // GRID_SIZE) * GRID_SIZE
+        half_height = SCREEN_HEIGHT // 2
+        start_y = (half_height // GRID_SIZE) * GRID_SIZE
         super().__init__((start_x, start_y), SNAKE_COLOR)
         self.length = 1
         self.positions = [(start_x, start_y)]
         self.direction = random.choice([
-            (GRID_SIZE, 0), (-GRID_SIZE, 0),
-            (0, GRID_SIZE), (0, -GRID_SIZE)
+            (GRID_SIZE, 0),
+            (-GRID_SIZE, 0),
+            (0, GRID_SIZE),
+            (0, -GRID_SIZE)
         ])
         self.next_direction = None
         self.last = None
@@ -120,17 +121,17 @@ class Snake(GameObject):
 
     def reset(self):
         """Сбрасывает змейку в исходное состояние."""
-        start_x = (
-            (SCREEN_WIDTH // (2 * GRID_SIZE)) * GRID_SIZE
-        )
-        start_y = (
-            (SCREEN_HEIGHT // (2 * GRID_SIZE)) * GRID_SIZE
-        )
+        half_width = SCREEN_WIDTH // 2
+        start_x = (half_width // GRID_SIZE) * GRID_SIZE
+        half_height = SCREEN_HEIGHT // 2
+        start_y = (half_height // GRID_SIZE) * GRID_SIZE
         self.positions = [(start_x, start_y)]
         self.length = 1
         self.direction = random.choice([
-            (GRID_SIZE, 0), (-GRID_SIZE, 0),
-            (0, GRID_SIZE), (0, -GRID_SIZE)
+            (GRID_SIZE, 0),
+            (-GRID_SIZE, 0),
+            (0, GRID_SIZE),
+            (0, -GRID_SIZE)
         ])
         self.next_direction = None
         self.last = None
