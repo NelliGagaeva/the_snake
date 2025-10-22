@@ -1,5 +1,6 @@
-import pygame
 from random import choice, randint
+
+import pygame
 
 # Константы размеров экрана и сетки
 SCREEN_WIDTH = 640
