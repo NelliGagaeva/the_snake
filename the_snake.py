@@ -159,7 +159,6 @@ def main():
         snake.update_direction()
         snake.move()
 
-        # Проверка съедания яблока
         if snake.get_head_position() == apple.position:
             snake.length += 1
             apple.position = apple.randomize_position(
@@ -167,7 +166,7 @@ def main():
             )
 
         # Проверка столкновения с телом
-        if snake.get_head_position() in snake.positions[1:]:
+        elif snake.get_head_position() in snake.positions[1:]:
             snake.reset()
             apple.position = apple.randomize_position(
                 occupied_positions=snake.positions
